@@ -1,4 +1,6 @@
 from flask import Flask, request, render_template ,json
+import socket
+
 app=Flask(__name__)
 #app=Flask(__name__, template_folder="templates")
 
@@ -18,6 +20,10 @@ def login():
 	else:
 		return render_template('login.html')	
 		
+def get_local_ip():
+    hostname = socket.gethostname()
+    local_ip = socket.gethostbyname(hostname)
+    return local_ip
 	
 if __name__=="__main__":
 	from waitress import serve
