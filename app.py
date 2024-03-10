@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template ,json
 import socket
+from ipaddress import *
 
 app=Flask(__name__)
 #app=Flask(__name__, template_folder="templates")
@@ -16,7 +17,11 @@ def login():
 		#проверка логина и пароля
 		if username and password:
 			ipAddr=get_local_ip()
-			return render_template('list.html',ip=ipAddr)
+			for ip in ip_network('192.168.32.160/255.255.255.240'):
+			#for ip in ip_network('127.0.0.1/255.255.255.240'):
+				print(ip)
+
+			return render_template('list.html',ip=ipAddr,adressa=ip)
 			#return 'Вы вошли в систему!'
 	else:
 		return render_template('login.html')	
