@@ -15,15 +15,16 @@ def login():
 		password=request.form.get('password')
 		#проверка логина и пароля
 		if username and password:
-			return render_template('list.html')
+			ipAddr=get_local_ip()
+			return render_template('list.html',ip=ipAddr)
 			#return 'Вы вошли в систему!'
 	else:
 		return render_template('login.html')	
 		
 def get_local_ip():
-    hostname = socket.gethostname()
-    local_ip = socket.gethostbyname(hostname)
-    return local_ip
+	hostname=socket.gethostname()
+	local_ip=socket.gethostbyname(hostname)
+	return local_ip
 	
 if __name__=="__main__":
 	from waitress import serve
